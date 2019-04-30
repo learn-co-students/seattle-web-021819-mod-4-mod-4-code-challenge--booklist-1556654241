@@ -10,7 +10,6 @@ class App extends Component {
     this.state = {
       books: [],
       shelf: [],
-      newBook: {}
     }
   }
 
