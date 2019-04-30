@@ -12,3 +12,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+#book {
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  width: 200px;
+  height: 300px;
+}
+
+.book-cover {
+  width: 120px;
+  height: 200px;
+}
