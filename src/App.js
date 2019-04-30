@@ -51,7 +51,7 @@ class App extends Component {
       }
       return true;
     })
-    this.state({ bookshelf: books })
+    this.setState({ bookshelf: books })
   }
 
   render() {
