@@ -2,7 +2,15 @@ import React from "react";
 
 class Form extends React.Component {
   render() {
-    return <h1>{/*create form*/}</h1>;
+    return <form onSubmit={(event) => {
+      event.preventDefault();
+      this.props.handleSubmit(event.target.value)
+    }}>
+      <input type="text" placeholder="title" value="title"/>
+      <input type="text" placeholder="author" value="author"/>
+      <input type="text" placeholder="img" value="img"/>
+      <input type="submit" value="submit" />
+    </form>
   }
 }
 
