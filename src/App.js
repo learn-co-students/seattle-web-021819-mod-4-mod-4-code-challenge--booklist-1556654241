@@ -1,21 +1,19 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import BookList from "./containers/BookList";
-import Bookshelf from "./containers/Bookshelf";
+import CocktailContainer from "./containers/CocktailContainer";
+import CocktailDisplay from "./containers/CocktailDisplay";
+import CocktailForm from "./components/CocktailForm"
 
-const URL = "http://localhost:3005/books"
+const URL = "http://localhost:3000/api/v1/cocktails"
 
 class App extends Component {
 
   constructor(){
     super()
     this.state = {
-      books: [],
-      myBooks: [],
-      title: "",
-      author: "",
-      img: ""
+      cocktails: [],
+      myCocktails: []
     }
   }
 
@@ -25,69 +23,48 @@ componentDidMount(){
   .then(data => {
     console.log(data)
     this.setState({
-      books: data
+      cocktails: data
     })
   })
 }
 
-addBook = (book) => {
-  if(!this.state.myBooks.includes(book))
+addCocktail = (cocktail) => {
   this.setState({
-    myBooks: [...this.state.myBooks, book]
+    myCocktails: [cocktail]
   })
 }
 
-removeBook = (book) => {
-  const newBooks = this.state.myBooks.filter((bb)=> {
-    return bb !== book
-  })
-  this.setState({
-    myBooks: newBooks
-  })
-}
 
-createBookTitle = (event) => {
-  this.setState({
-    title: event.target.value,
-  })
-}
 
-createBookAuthor = (event) => {
+createNewCocktail = (state) => {
+  console.log(state)
+  let newCocktail = {
+    name: state.name,
+    description: state.description,
+    instruction: state.instruction,
+    source: state.source
+  }
   this.setState({
-    author: event.target.value,
+    cocktails: [...this.state.cocktails, newCocktail]
   })
-}
-
-createBookImg = (event) => {
-  this.setState({
-    img: event.target.value,
-  })
-}
-
-handleSubmit = (event) => {
-  event.preventDefault()
 }
 
   render() {
 
-const {books, myBooks, title, author, img} = this.state
+const {cocktails, myCocktails} = this.state
 
     return (
       <div className="book-container">
-        <BookList
-          books={books}
-          addBook={this.addBook}
-          title={title}
-          author={author}
-          img={img}
-          createBookTitle={this.createBookTitle}
-          createBookAuthor={this.createBookAuthor}
-          createBookImg={this.createBookImg}
+        <CocktailContainer
+          cocktails={cocktails}
+          addCocktail={this.addCocktail}
+          createNewCocktail={this.createNewCocktail}
           />
-        <Bookshelf
-          myBooks={myBooks}
-          removeBook={this.removeBook}
+        <CocktailDisplay
+          myCocktails={myCocktails}
+    
            />
+
       </div>
     );
   }
